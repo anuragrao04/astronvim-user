@@ -83,5 +83,19 @@ return {
     --     ["~/%.config/foo/.*"] = "fooscript",
     --   },
     -- }
+  vim.g.copilot_no_tab_map = true
+  vim.g.copilot_assume_mapped = true
+  vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })   --
+
+  local cmp_nvim_lsp = require "cmp_nvim_lsp"
+
+  require("lspconfig").clangd.setup {
+    on_attach = on_attach,
+    capabilities = cmp_nvim_lsp.default_capabilities(),
+    cmd = {
+      "clangd",
+      "--offset-encoding=utf-16",
+    },
+  }
   end,
 }
